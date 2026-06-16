@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        form {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;  
+        }
+        input{
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    
+    <form onsubmit="submitHandle()">
+    <h1>Registration Form</h1>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name"><br><br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" onfocus="handleFocus()" onblur="handleBlur()"><br><br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" oninput="PasswordSetUp()" ><br><br>
+    <label for="confirm_password">Confirm Password:</label>
+    <input type="password" id="confirm_password" name="confirm_password"><br><br>
+    <label for="gender">Gender:</label>
+    <select id="gender" name="gender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+    </select><br><br>
+    <label for ="profilePhoto">Profile Photo:</label>
+    <input type="file" id="profilePhoto" name="profilePhoto" onchange="handleFileChange()"><br><br>
+
+    <button type="submit" >Register</button>
+</body>
+<script>
+function handleFocus() {
+    document.getElementById('email').style.backgroundColor = '#e0f7fa';
+
+}
+function handleBlur() {
+    document.getElementById('email').style.backgroundColor = '';
+}
+function submitHandle() {
+    let password = document.getElementById('password').value;
+    let confirmPassword = document.getElementById('confirm_password').value;
+    if (password !== confirmPassword) {
+        alert('Passwords do not match!');
+        return false; // Prevent form submission
+    }
+}
+function handleFileChange() {
+    const fileInput = document.getElementById('profilePhoto');
+    const fileName = fileInput.files[0]?.name;
+    if (fileName) {
+        document.getElementById('profilePhotoLabel').textContent = `Selected file: ${fileName}`;
+    }
+}
+function PasswordSetUp() {
+    let password = document.getElementById('password').value;
+    if (password.length < 6) {
+        document.getElementById('password').style.borderColor = 'red';
+    } else {
+        document.getElementById('password').style.borderColor = '';
+    }
+}
+</script>
+
+</html>
